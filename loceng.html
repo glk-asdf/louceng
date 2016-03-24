@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="animate.js"></script>
+	<script type="text/javascript">
+	window.onload=function(){
+		var divs=document.getElementsByTagName("div");
+		var imgs=document.getElementsByTagName("img");
+		var arrd=[];
+		var pg=document.documentElement.clientHeight;
+		 console.log(document.documentElement);
+		for (var i = 0; i < divs.length; i++) {
+			arrd.push(divs[i].offsetTop)
+			
+		}
+		// var obj=document.body.scrollTop?document.body:document.documentElement;
+		var ferg=true;
+		var ferg1=true;
+		window.onscroll=function(){
+			// if (!ferg) {return};
+			// ferg=false;
+		var obj=document.body?document.body:document.documentElement;
+			var ydjl=obj.scrollTop+pg;
+			var ydjl1=obj.scrollTop;
+			for (var j = 0; j < imgs.length; j++) {
+				if (ydjl>arrd[j+1]) {
+					imgs[j].src=imgs[j].title
+				}
+			}
+			// ferg=true;
+			// console.log(arrd)
+			if (ydjl1>=500) {
+				if (ferg1) {
+					animate(fhqd,{opacity:1},function(){
+						ferg1=false;
+					});
+					animate(divs[0],{top:0})
+
+				}
+				// fhqd.style["opacity"]=1
+			}else{
+					if (!ferg1) {
+					animate(fhqd,{opacity:0},function(){
+						ferg1=true;
+					});
+					animate(divs[0],{top:-100})
+				}
+				}
+	        if (!ferg) {return};
+	        ydjl=obj.scrollTop+(pg/2);
+			for (var j = 0; j < imgs.length; j++) {
+				if (ydjl>arrd[j+1]) {
+					for (var i = 0; i < lis.length; i++) {
+					lis[i].style.background="#f4f4f4";
+				}
+				lis[j].style.background="#df0094";
+				}
+			}
+			
+				
+		}
+		var ul=document.getElementsByTagName("ul")[0];
+		var lis=document.getElementsByTagName("li");
+		var obj=document.body?document.body:document.documentElement;
+		ul.style.top=(obj.clientHeight-ul.offsetHeight)/2;
+		ul.style.left=divs[0].offsetLeft-ul.offsetWidth;
+		window.onresize=function(){
+
+			ul.style.top=(obj.clientHeight-ul.offsetHeight)/2;
+		    ul.style.left=divs[0].offsetLeft-ul.offsetWidth;
+		}
+		for (var i = 0; i < lis.length; i++) {
+			lis[i].index=i;
+			lis[i].onclick=function(){
+	            ferg=false;
+				for (var i = 0; i < lis.length; i++) {
+					lis[i].style.background="#f4f4f4";
+				}
+				lis[this.index].style.background="#df0094";
+				
+				animate(obj,{scrollTop:divs[this.index+1].offsetTop},function(){
+					ferg=true;
+				})
+			}
+		};
+		var fhqd=document.getElementsByClassName("fhqd")[0];
+		fhqd.onclick=function(){
+			animate(obj,{scrollTop:0});
+		}
+
+	}
+	</script>
+	<style type="text/css">
+	/*body{
+		background-attachment: scroll;
+	}*/
+	div{
+		width: 800px;
+		height: 400px;
+		margin: 0 auto;
+	}
+	ul{
+		width: 20px;
+		height: 100px;
+		position: fixed;
+		left: 20px;
+		top: 300px;
+
+	}
+	li{
+		width: 20px;
+		height: 20px;
+		line-height: 20px;
+		text-align: center;
+		background: #f4f4f4;
+	}
+	.fhqd{
+		display: block;
+		position: fixed;
+		bottom: 20px;
+		right: 20px;
+		width: 40px;
+		height: 40px;
+		background: #df0094;
+		opacity: 0;
+	}
+	.qwe{
+		display: block;
+		height: 1000px;
+		width: 1000px;
+	}
+	.xls{
+		width: 100%;
+		height: 100px;
+		background: red;
+		position: fixed;
+		top: -100px;
+	}
+	</style>
+</head>
+<body>
+<!-- <span class="qwe">123</span> -->
+    <div class="xls">123</div>
+	<div><img  src="" title="./image/banner1.jpg"></div>
+	<div><img  src="" title="./image/banner2.jpg"></div>
+	<div><img  src="" title="./image/banner3.jpg"></div>
+	<div><img  src="" title="./image/banner4.jpg"></div>
+	<div><img  src="" title="./image/banner5.jpg"></div>
+	<ul>
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+		<li>4</li>
+		<li>5</li>
+	</ul>
+	<span class="fhqd">返回顶部</span>
+</body>
+</html>
